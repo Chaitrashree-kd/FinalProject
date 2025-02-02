@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     // Login to Docker Hub using Jenkins credentials
-                    withCredentials([usernamePassword(credentialsId: 'chaitrashreekd/', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
                     }
                     // Push images to Docker Hub
@@ -60,6 +60,6 @@ pipeline {
         }
         failure {
             echo 'Build failed.'
-        }
-    }
+}
+}
 }
